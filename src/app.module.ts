@@ -7,12 +7,14 @@ import { UserModule } from './user/user.module';
 import { TaskService } from './task/task.service';
 import { TaskController } from './task/task.controller';
 import { TaskModule } from './task/task.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'reimagined-space-guide-rq47vrgww9fqg7-5432.app.github.dev',
+      host: 'localhost',
       port: 5432,
       username: 'admin',  
       password: 'admin',  
@@ -23,6 +25,10 @@ import { TaskModule } from './task/task.module';
     AuthModule,
     UserModule,
     TaskModule,
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
