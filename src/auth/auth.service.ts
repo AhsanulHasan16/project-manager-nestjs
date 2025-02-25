@@ -12,21 +12,28 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.userService.findByEmail(email);
-    if (user && await bcrypt.compare(pass, user.password)) {
-      const { password, ...result } = user;
-      return result;
+
+    if (user) {
+      const isMatch = await bcrypt.compare(pass, user.password);
+      if (isMatch) {
+        const { password, ...result } = user;
+        return result;
+      }
     }
+    console.log('User validation failed');
     return null;
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.id, role: user.role };
+    const payload = { email: user.email, sub: user.id, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
 
   async register(user: any) {
-    return this.userService.create(user);
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const newUser = { ...user, password: hashedPassword };
+    return this.userService.create(newUser);
   }
 }

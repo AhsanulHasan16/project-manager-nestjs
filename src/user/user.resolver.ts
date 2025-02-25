@@ -1,8 +1,11 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './user.entity';
+import { UseGuards } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Resolver(() => User)
+@UseGuards(ThrottlerGuard)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 

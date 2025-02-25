@@ -1,4 +1,4 @@
-import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Request, Post, UseGuards, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 
@@ -6,10 +6,14 @@ import { LocalAuthGuard } from './local-auth.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
+  
   @Post('login')
   async login(@Request() req) {
-    return this.authService.login(req.user);
+    const user = await this.authService.validateUser(req.body.email, req.body.password);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+    return this.authService.login(user);
   }
 
   @Post('register')

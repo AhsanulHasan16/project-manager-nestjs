@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/c
 import { TaskService } from './task.service';
 import { Task } from './task.entity';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CreateTaskDto } from './create-task.dto';
 
 @Controller('tasks')
 @UseGuards(JwtAuthGuard)
@@ -19,8 +20,8 @@ export class TaskController {
   }
 
   @Post()
-  create(@Body() task: Task): Promise<Task> {
-    return this.taskService.create(task);
+  create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.taskService.create(createTaskDto);
   }
 
   @Delete(':id')

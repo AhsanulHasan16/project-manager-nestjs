@@ -23,6 +23,6 @@ export class Task {
   status: string;
 
   @Field(() => User)
-  @ManyToOne(() => User, user => user.id)
+  @ManyToOne(() => User, user => user.tasks)
   assignedTo: User;
 }

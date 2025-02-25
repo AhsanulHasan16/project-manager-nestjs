@@ -11,16 +11,16 @@ export class UserService {
   ) {}
 
   findAll(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['tasks'] });
   }
 
   findOne(id: number): Promise<User> {
-    return this.userRepository.findOne({ where: { id } });
+    return this.userRepository.findOne({ where: { id }, relations: ['tasks'] });
   }
 
-    findByEmail(email: string): Promise<User> {
-      return this.userRepository.findOne({ where: { email } });
-    }
+  findByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
+  }
     
   create(user: User): Promise<User> {
     return this.userRepository.save(user);
