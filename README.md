@@ -80,5 +80,6 @@ The following things are not requirements related to my field or my job position
 
 
 
-Yours truly,/n
+Yours truly,
+
 Md. Ahsanul Hasan.
