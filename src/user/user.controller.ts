@@ -10,14 +10,14 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, description: 'Return all users.' })
+  @ApiResponse({ status: 200, description: 'Return all users.',  type: [User] })
   @Get()
   findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @ApiOperation({ summary: 'Get a specific user by ID' })
-  @ApiResponse({ status: 200, description: 'Return a user.' })
+  @ApiResponse({ status: 200, description: 'Return a user.', type: User })
   @Get(':id')
   findOne(@Param('id') id: number): Promise<User> {
     return this.userService.findOne(id);

@@ -13,21 +13,21 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @ApiOperation({ summary: 'Get all tasks' })
-  @ApiResponse({ status: 200, description: 'Return all tasks.' })
+  @ApiResponse({ status: 200, description: 'Return all tasks.', type: [Task] })
   @Get()
   findAll(): Promise<Task[]> {
     return this.taskService.findAll();
   }
 
   @ApiOperation({ summary: 'Get a specific task by ID' })
-  @ApiResponse({ status: 200, description: 'Return a task.' })
+  @ApiResponse({ status: 200, description: 'Return a task.', type: Task })
   @Get(':id')
   findOne(@Param('id') id: number): Promise<Task> {
     return this.taskService.findOne(id);
   }
 
   @ApiOperation({ summary: 'Create a new task' })
-  @ApiResponse({ status: 201, description: 'The task has been successfully created.' })
+  @ApiResponse({ status: 201, description: 'The task has been successfully created.', type: Task })
   @Post()
   create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.taskService.create(createTaskDto);
