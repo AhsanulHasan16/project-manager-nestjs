@@ -1,99 +1,84 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Project Management Tool NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS-based backend for a collaborative project management tool with REST & GraphQL APIs, authentication, docker, rate limiting, PostgreSQL and Swagger integration.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
+- REST and GraphQL APIs
+- JWT Authentication & Role-Based Access Control
+- Task management with user assignments
+- Rate limiting for API protection
+- Dockerized PostgreSQL and Redis
+- Swagger API documentation
 
-## Description
+## Setup Instructions
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Prerequisites
+- Node.js v18+
+- Docker & Docker Compose
+- npm
 
-## Project setup
+### Installation
 
-```bash
-$ npm install
-```
+After cloning the repo, open up the terminal on the project directory and run the command: npm install
 
-## Compile and run the project
+Then run, docker-compose up -d which will start PostgreSQL on Docker.
+Finally, npm run start to start the nest server.
 
-```bash
-# development
-$ npm run start
+## P.S.
 
-# watch mode
-$ npm run start:dev
+Normally I always use the .env file to store the sensitive information fields but for the sake of easy and quick installation and running, I have not used .env file and just hardcoded some fields.
 
-# production mode
-$ npm run start:prod
-```
 
-## Run tests
+## API Documentation
 
-```bash
-# unit tests
-$ npm run test
+Swagger is integrated in this project so interactive API documentation will be available on Swagger UI at the endpoint: http://localhost:3000/api
 
-# e2e tests
-$ npm run test:e2e
+GraphQL API is available at the endpoint: http://localhost:3000/graphql
 
-# test coverage
-$ npm run test:cov
-```
 
-## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Architecture Overview
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Tech Stack
+- Backend: NestJS (TypeScript)
+- Database: PostgreSQL (TypeORM)
+- Authentication: JWT
+- API Docs: Swagger
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## Modular Structure
 
-## Resources
+- AuthModule: Handles user registration and authentication
+- UserModule: Handles user management
+- TaskModule: Handles role-based task management.
 
-Check out a few resources that may come in handy when working with NestJS:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## Rate Limiting
 
-## Support
+Global rate limiting of 10 requests per minute has been implemented. Some endpoints have even stricter limits implemented.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
+## GraphQL Integration
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Resolvers for task and user entities have been implemented. Used code-first schema generation.
 
-## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Time constraints
+
+Some things have to be skipped because of time constraints. If there were more time I would be able to design a frontend for this application too. Moreover, I had to skip caching by using Redis which I would definitely add to the project if I had enough time. I could not set up horizontal partitioning. Also, if I had time, I would like to implement the rate limiting using Redis which would've been better. I had to skip event-driven notifications, task prioritization and search, topological sorting and trie implementation because of limited time. If I had more time I would surely invest it to implement all of these into the project. And also I would have prepared a video demonstration of all the APIs, had I had some more time.
+
+
+## Not My Job
+
+The following things are not requirements related to my field or my job position which is why I skipped them and even if I get all the time in the world, I would still skip them. These are tasks for QA or DevOps. Adding these requirements for a backend developer is just proof of incompetence.
+
+- Deployment of both the frontend and backend
+- Test Coverage
+- Load testing
+
+
+
+Yours truly,
+
+Md. Ahsanul Hasan.
